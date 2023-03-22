@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen>
     Emoji(path: "assests/heart.json", scale: 0.7),
   ];
 
-  dynamic currentHoverImoji = 100;
+  int currentHoverImoji = 100;
   double currentHoverPosition = 0;
   @override
   Widget build(BuildContext context) {
@@ -76,14 +76,16 @@ class _HomeScreenState extends State<HomeScreen>
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: GestureDetector(
-              onLongPressEnd: (details) {
-                _controller.stop();
-                _controller.reset();
-                setState(() {
+                 onLongPress: () => _controller.repeat(),
+              onLongPressEnd: (_) {
+                 setState(() {
                   currentHoverImoji = 100;
                 });
+                _controller.stop();
+                _controller.reset();
+               
               },
-              onLongPress: () => _controller.repeat(),
+           
               onLongPressDown: (details) {
                 setState(() {
                   currentHoverImoji = 2;
